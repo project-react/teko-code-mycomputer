@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Register from './components/App/Page/Register/Register.js'; 
+import Register from './components/App/Page/Register/Register'; 
 import * as serviceWorker from './serviceWorker';
 
 
