@@ -10,6 +10,7 @@
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "react-tap-event-plugin": "^3.0.3",
+    "reactn": "^2.1.4",
     "validator": "^11.0.0"
   },
   "scripts": {

@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Register from './components/App/Page/Register/Register'; 
 import * as serviceWorker from './serviceWorker';
 
+import Register from './components/Page/Register/Register'; 
+// import { Login } from './components/Page/Login'; 
+// import { input } from './components/themes/Inputthemes'; 
 
 ReactDOM.render(<Register />, document.getElementById('Register')); 
+
 
 // nguyenduychien test
 
