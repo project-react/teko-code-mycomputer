@@ -2,14 +2,10 @@ const validators = {
     username: {
       rules: [
         {
-          test: /^\S+$/, 
-          message: 'Username must write immediately'
-        }, 
-        {
           test: (value) => {
             return value.length > 0; 
           }, 
-          message: 'Username cannot be left blank',
+          message: 'Username field cannot be empty',
         },
         {
           test: (value) => {
@@ -17,6 +13,14 @@ const validators = {
           },
           message: 'Username must be longer than six characters',
         },
+        {
+          test: /^\S+$/, 
+          message: 'Username must write immediately'
+        },
+        {
+          test: /[a-zA-Z0-9]+$/, 
+          message: 'Username must character a-z or upper character, 0-9'
+        }
       ],
       errors: [],
       valid: false,
@@ -24,6 +28,12 @@ const validators = {
     },
     email: {
       rules: [
+        {
+          test: (value) => {
+            return value.length > 0; 
+          }, 
+          message: 'Email field cannot be empty',
+        }, 
         {
           test: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 
           message: 'Email not true'
@@ -37,9 +47,19 @@ const validators = {
       rules: [
         {
           test: (value) => {
-            return value.length >= 6;
+            return value.length > 0; 
+          }, 
+          message: 'Password field cannot be empty',
+        }, 
+        {
+          test: (value) => {
+            return value.length >= 8;
           },
-          message: 'Password must not be shorter than 6 characters',
+          message: 'Password must not be shorter than 8 characters',
+        },
+        {
+          test: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/, 
+          message: 'Password included one or more (Character and upper Character and Number)', 
         },
       ],
       errors: [],

@@ -25,8 +25,6 @@ class Register extends Component {
     handleClick(event) {
         console.log("Success");
     }
-
-
     setStateRegister(type){
         switch(type){
             case 'username':
@@ -39,15 +37,14 @@ class Register extends Component {
                 this.setState({ 'password' : displayValidationErrors(type, validators) });
         }
     }
-
     inputChange = (type) => {
         let textInput = document.getElementById(type).value;   
         updateValidation(type , textInput, validators);
         this.setStateRegister(type); 
         this.setState({ edit: true }); 
     }
-
     render() { 
+        console.log("RENDER")
         let error = { username: '', email: '', password: ''}; 
         if (this.state.edit){
             Object.keys(validators).forEach((field) => {
@@ -61,7 +58,13 @@ class Register extends Component {
                     error[field] = <div className="success"> {field} is form valid </div>
                 } 
             });
-        }   
+        }  
+        let buttonRegister = ''; 
+        if ( isFormValid(validators) ){
+            buttonRegister = (
+                <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)} />
+            ); 
+        }
         return (
             <div>
                 <MuiThemeProvider>
@@ -92,14 +95,13 @@ class Register extends Component {
                         />
                         { error.password }
                         <br />
-                        <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)} />
+                        { buttonRegister }
                     </div>
                 </MuiThemeProvider>
             </div>
         );
     }
 }
-
 const style = {
     margin: 15,
 };
