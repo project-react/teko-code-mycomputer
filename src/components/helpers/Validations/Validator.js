@@ -66,6 +66,20 @@ const validators = {
       valid: false,
       state: ''
     },
+    confirmpassword: {
+      rules: [
+        {
+          test: (value) => {
+            let currentpassword = document.getElementById('password').value;
+            return value === currentpassword; 
+          }, 
+          message: 'Confirm Password not equal Password',
+        }, 
+      ],
+      errors: [],
+      valid: false,
+      state: ''
+    }
 };
 
 export function updateValidation (type, text, validators) {

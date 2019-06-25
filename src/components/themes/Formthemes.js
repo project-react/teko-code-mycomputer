@@ -1,38 +1,42 @@
-import React from 'react'; 
+import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
-import Inputthemes from '../themes/Inputthemes'; 
+import Inputthemes from '../themes/Inputthemes';
 
-import { updateValidation, displayValidationErrors, isFormValid } from '../helpers/Validations/Validator'; 
+import { updateValidation, displayValidationErrors, isFormValid } from '../helpers/Validations/Validator';
 
 const SetstateForm = (type, page) => {
-    switch(type){
-        case 'username':
-            page.setState({ 'username' : displayValidationErrors(type, page.state.validators) });
-            break;
-        case 'email':
-            page.setState({ 'email' : displayValidationErrors(type, page.state.validators) });
-            break;
-        default:
-            page.setState({ 'password' : displayValidationErrors(type, page.state.validators) });
-    }
+    page.state.inputManagement[type].errors = displayValidationErrors(type, page.state.validators); 
 }
 
 const InputChange = (type, page) => {
-    let textInput = document.getElementById(type).value;   
-    updateValidation(type , textInput, page.state.validators);
-    page.setState(SetstateForm(type, page)); 
-    page.setState({ edit: true }); 
+    let textInput = document.getElementById(type).value;
+    updateValidation(type, textInput, page.state.validators);
+    page.setState(SetstateForm(type, page));
+    page.setState({ edit: true });
 }
 
-const Errors = ( page ) => {
-    let validators = page.state.validators; 
-    let errors = { username: '', email: '', password: ''}; 
+const Errors = (page) => {
+
+    let validators = page.state.validators;
+    // Create smart object ref from state of page
+    // {
+    //     'username': ''
+    //     'email': ''
+    //     'password': ''
+    // }
+    let arrayErrors = Object.keys(page.state.inputManagement); 
+    let state = { options: {} };
+    arrayErrors.forEach((e, i) => state.options[e] = '');
+    // => create new state 
+
+    let errors = state.options; 
+    
     Object.keys(validators).forEach((field) => {
         if (!validators[field].valid) {
             errors[field] = (
-                page.state[field].map((error, i) => {     
+                page.state.inputManagement[field].errors.map((error, i) => {     
                     return (<div className="error" key={i}> {error} </div>) 
                 })
             )
@@ -40,7 +44,8 @@ const Errors = ( page ) => {
             errors[field] = <div className="success"> {field} is form valid </div>
         } 
     });
-    return errors; 
+
+    return errors;
 }
 
 const AddInputsToForm = (props) => {
@@ -48,19 +53,20 @@ const AddInputsToForm = (props) => {
     return (
         <div>
             { 
-                atributeArray.map((Atribute, i) => {
+                Object.keys(atributeArray).map( (i) => {
                     return (
                         <div key = {i}>
                             <Inputthemes
-                                hintText = { Atribute.hintText }
-                                floatingLabelText = { Atribute.floatingLabelText } 
-                                id = { Atribute.id }
-                                onChange = {(event) => InputChange( Atribute.id, props.page)}
+                                hintText = { atributeArray[i].hintText }
+                                floatingLabelText = { atributeArray[i].floatingLabelText } 
+                                id = { atributeArray[i].id }
+                                type = { atributeArray[i].type }
+                                onChange = {(event) => InputChange( atributeArray[i].id, props.page)}
                             />
-                            { props.errors[Atribute.id] }
+                            { props.errors[atributeArray[i].id] }
                             <br />
                         </div>
-                    )
+                    ); 
                 })
             }
         </div>
@@ -68,14 +74,19 @@ const AddInputsToForm = (props) => {
 }
 
 const Formthemes = (props) => {
-    let stateForm =  props.page.state; 
-    let errors = Errors( props.page ); 
+
+    let stateForm = props.page.state;
+
+    let errors = Errors(props.page);
+
     let buttonRegister = ''; 
+
     if ( isFormValid(stateForm.validators) ){
         buttonRegister = (
             <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => props.page.handleClick(event)} />
         ); 
     }
+
     return (
         <div>
             <MuiThemeProvider>
@@ -83,14 +94,14 @@ const Formthemes = (props) => {
                     <AppBar title = {props.title}  />
                     <AddInputsToForm 
                         atributeArray = { stateForm.inputManagement }
-                        page = {props.page}
-                        errors = {errors} 
+                        page = { props.page }
+                        errors = { errors } 
                     />
                     { buttonRegister }    
                 </div>
             </MuiThemeProvider>
         </div>
-    ); 
+    );
 }
 
 const style = {
