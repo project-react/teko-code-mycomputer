@@ -1,29 +1,15 @@
 import React, { Component } from 'react';
-import './Register.css';
+
 import validators, { resetValidators } from '../../helpers/Validations/Validator';
 import Formthemes from '../../themes/Formthemes'; 
 import Linkthemes from '../../themes/Linkthemes'; 
 
-class Register extends Component {
+class ResetPassword extends Component {
     constructor(props) {
-        super(props);
+        super(props);   
         this.state = {
             validators: validators, 
             inputManagement: {
-                username: {
-                    hintText: 'Enter your User Name', 
-                    floatingLabelText: 'User Name', 
-                    id: 'username', 
-                    type: '', 
-                    errors: [], 
-                }, 
-                email: {
-                    hintText: 'Enter your Email', 
-                    floatingLabelText: 'Your Email', 
-                    id: 'email', 
-                    type: '', 
-                    errors: [], 
-                }, 
                 password: {
                     hintText: 'Enter your Password', 
                     floatingLabelText: 'Your Password', 
@@ -31,18 +17,18 @@ class Register extends Component {
                     type: 'password', 
                     errors: [], 
                 }, 
-                confirmpassword: {
-                    hintText: 'Enter your Comfirm Password', 
-                    floatingLabelText: 'Comfirm Password', 
-                    id: 'confirmpassword', 
+                newpassword: {
+                    hintText: 'Enter your New Password', 
+                    floatingLabelText: 'New Password', 
+                    id: 'newpassword', 
                     type: 'password', 
                     errors: [], 
-                }, 
+                }
             }, 
             edit: false, 
         }
         resetValidators();
-        document.title = "Register"; 
+        document.title = "Reset Password"; 
     }
 
     handleClick(event) {
@@ -50,11 +36,11 @@ class Register extends Component {
     }
     
     render() { 
-        let buttonManagement = ["ForgotPassword", "Login", "ResetPassword"]; 
-        return (  
+        let buttonManagement = ["Login", "ForgotPassword", "Register"]; 
+        return ( 
             <div>
                 <Formthemes 
-                    title = "Register"
+                    title = "Reset Password"
                     page = {this}
                 />
                 <Linkthemes 
@@ -65,4 +51,4 @@ class Register extends Component {
     }
 }
 
-export default Register;
+export default ResetPassword;

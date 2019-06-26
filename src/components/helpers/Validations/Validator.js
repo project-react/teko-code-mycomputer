@@ -79,6 +79,36 @@ const validators = {
       errors: [],
       valid: false,
       state: ''
+    }, 
+    newpassword: {
+      rules: [
+        {
+          test: (value) => {
+            return value.length > 0; 
+          }, 
+          message: 'Password field cannot be empty',
+        }, 
+        {
+          test: (value) => {
+            return value.length >= 8;
+          },
+          message: 'Password must not be shorter than 8 characters',
+        },
+        {
+          test: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/, 
+          message: 'Password included one or more (Character and upper Character and Number)', 
+        },
+        {
+          test: (value) => {
+            let oldpassword = document.getElementById('password').value;
+            return value !== oldpassword; 
+          }, 
+          message: 'New Password must not equal old Password',
+        }, 
+      ],
+      errors: [],
+      valid: false,
+      state: ''
     }
 };
 
@@ -132,13 +162,15 @@ export function displayValidationErrors (fieldName, validators) {
     return result;
 }
 
-export function isFormValid(validators) {
-    let status = true;
-    Object.keys(validators).forEach((field) => {
+export function isFormValid(validators, inputManagement) {
+    let status = true;  
+    Object.keys(inputManagement).forEach((field) => {
       if (!validators[field].valid) {
         status = false;
       } 
     });
+  
+
     return status;
 }
 

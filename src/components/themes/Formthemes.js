@@ -3,6 +3,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Inputthemes from '../themes/Inputthemes';
+import { Link } from 'react-router-dom'
 
 import { updateValidation, displayValidationErrors, isFormValid } from '../helpers/Validations/Validator';
 
@@ -33,7 +34,7 @@ const Errors = (page) => {
 
     let errors = state.options; 
     
-    Object.keys(validators).forEach((field) => {
+    Object.keys(page.state.inputManagement).forEach((field) => {
         if (!validators[field].valid) {
             errors[field] = (
                 page.state.inputManagement[field].errors.map((error, i) => {     
@@ -79,11 +80,11 @@ const Formthemes = (props) => {
 
     let errors = Errors(props.page);
 
-    let buttonRegister = ''; 
+    let buttonHandle = ''; 
 
-    if ( isFormValid(stateForm.validators) ){
-        buttonRegister = (
-            <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => props.page.handleClick(event)} />
+    if ( isFormValid(stateForm.validators, stateForm.inputManagement) ){
+        buttonHandle = ( 
+            <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => props.page.handleClick(event)} />      
         ); 
     }
 
@@ -97,7 +98,7 @@ const Formthemes = (props) => {
                         page = { props.page }
                         errors = { errors } 
                     />
-                    { buttonRegister }    
+                    { buttonHandle } 
                 </div>
             </MuiThemeProvider>
         </div>

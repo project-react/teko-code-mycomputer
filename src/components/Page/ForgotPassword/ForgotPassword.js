@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './Register.css';
+
 import validators, { resetValidators } from '../../helpers/Validations/Validator';
 import Formthemes from '../../themes/Formthemes'; 
 import Linkthemes from '../../themes/Linkthemes'; 
 
-class Register extends Component {
+class ForgotPassword extends Component {
     constructor(props) {
-        super(props);
+        super(props);   
         this.state = {
             validators: validators, 
             inputManagement: {
@@ -24,25 +24,11 @@ class Register extends Component {
                     type: '', 
                     errors: [], 
                 }, 
-                password: {
-                    hintText: 'Enter your Password', 
-                    floatingLabelText: 'Your Password', 
-                    id: 'password', 
-                    type: 'password', 
-                    errors: [], 
-                }, 
-                confirmpassword: {
-                    hintText: 'Enter your Comfirm Password', 
-                    floatingLabelText: 'Comfirm Password', 
-                    id: 'confirmpassword', 
-                    type: 'password', 
-                    errors: [], 
-                }, 
             }, 
             edit: false, 
         }
         resetValidators();
-        document.title = "Register"; 
+        document.title = "Forgot Password"; 
     }
 
     handleClick(event) {
@@ -50,19 +36,19 @@ class Register extends Component {
     }
     
     render() { 
-        let buttonManagement = ["ForgotPassword", "Login", "ResetPassword"]; 
-        return (  
+        let buttonManagement = ["Login", "ResetPassword", "Register"]; 
+        return (
             <div>
                 <Formthemes 
-                    title = "Register"
+                    title = "Forgot Password"
                     page = {this}
                 />
                 <Linkthemes 
                     buttonManagement = { buttonManagement }
                 />
-            </div> 
+            </div>   
         );
     }
 }
 
-export default Register;
+export default ForgotPassword;
