@@ -1,5 +1,6 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,9 +11,9 @@ import Box from '@material-ui/core/Box';
 
 import { material } from 'components/material-ui'
 
-export default function Home() {
+export default function Admin() {
   const classes = material.useStyles();
-  document.title = "Home"; 
+  document.title = "Page Admin"; 
   return (
     <React.Fragment>
       <CssBaseline />
@@ -22,13 +23,16 @@ export default function Home() {
             Teko App
           </Typography>
           <nav>
-            <Link variant="button" color="textPrimary" href="/Login" className={classes.link}>
-              Login
-            </Link>
             <Link variant="button" color="textPrimary" href="/Register" className={classes.link}>
               Register
             </Link>
+            <Link variant="button" color="textPrimary" href="/ResetPassword" className={classes.link}>
+              Change password
+            </Link>
           </nav>
+          <Button href="#" color="primary" variant="outlined" className={classes.link}>
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
       {/* Hero unit */}

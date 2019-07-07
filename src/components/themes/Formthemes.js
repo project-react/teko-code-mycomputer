@@ -3,9 +3,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Inputthemes from '../themes/Inputthemes';
-import { Link } from 'react-router-dom'
 
-import { updateValidation, displayValidationErrors, isFormValid } from '../helpers/Validations/Validator';
+import { updateValidation, displayValidationErrors, isFormValid } from '../../helpers/Validations/Validator';
 
 const SetstateForm = (type, page) => {
     page.state.inputManagement[type].errors = displayValidationErrors(type, page.state.validators); 

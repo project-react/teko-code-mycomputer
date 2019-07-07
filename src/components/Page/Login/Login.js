@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-import validators, { resetValidators } from '../../helpers/Validations/Validator';
-import Formthemes from '../../themes/Formthemes'; 
-import Linkthemes from '../../themes/Linkthemes'; 
+import validators, { resetValidators } from 'helpers/Validations/Validator'
+import Formthemes from 'components/themes/Formthemes'; 
+import Linkthemes from 'components/themes/Linkthemes'; 
+import auth from 'services/auth'; 
 
 class Login extends Component {
     constructor(props) {
@@ -32,7 +33,9 @@ class Login extends Component {
     }
 
     handleClick(event) {
-        console.log("Success");
+        auth.login(() => {
+            this.props.history.push("/Admin");
+        }); 
     }
     
     render() { 

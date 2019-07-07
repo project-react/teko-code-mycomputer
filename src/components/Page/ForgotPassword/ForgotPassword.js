@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import validators, { resetValidators } from '../../helpers/Validations/Validator';
+import validators, { resetValidators } from '../../../helpers/Validations/Validator';
 import Formthemes from '../../themes/Formthemes'; 
 import Linkthemes from '../../themes/Linkthemes'; 
 

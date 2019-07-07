@@ -1,10 +1,12 @@
 import React from 'react';
 
-import Register from './components/Page/Register/Register'; 
-import Login from './components/Page/Login/Login'; 
-import ForgotPassword from './components/Page/ForgotPassword/ForgotPassword'; 
-import ResetPassword from './components/Page/ResetPassword/ResetPassword'; 
-import Home from './components/Page/Home/Home'; 
+import { Register } from 'components/Page/Register'; 
+import { Login } from 'components/Page/Login'; 
+import { ForgotPassword } from 'components/Page/ForgotPassword'; 
+import { ResetPassword } from 'components/Page/ResetPassword'; 
+import { Admin } from 'components/Page/Admin'
+import { ProtectedRoute } from 'router/protected.route'; 
+import { Home } from 'components/Page/Home'; 
 
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'; 
 
@@ -17,7 +19,9 @@ const App = () => {
                 <Route path="/ForgotPassword" component={ForgotPassword} />
                 <Route path="/ResetPassword" component={ResetPassword} />
                 <Route path="/Home" component={Home} />
-                <Redirect from="/" to="/Login" />
+                <Route path="/Admin" component={Admin} />
+                {/* <ProtectedRoute path="/Home"/> */}
+                <Redirect from="/" to="/Home" />
             </Switch>
         </Router>
     ); 
