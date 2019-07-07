@@ -1,6 +1,5 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,10 +9,11 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 
 import { material } from 'components/material-ui'
+import { Button }  from 'components/Button'
 
-export default function Admin() {
+
+export default function Admin(props) {
   const classes = material.useStyles();
-  document.title = "Page Admin"; 
   return (
     <React.Fragment>
       <CssBaseline />
@@ -23,28 +23,23 @@ export default function Admin() {
             Teko App
           </Typography>
           <nav>
-            <Link variant="button" color="textPrimary" href="/Register" className={classes.link}>
-              Register
-            </Link>
-            <Link variant="button" color="textPrimary" href="/ResetPassword" className={classes.link}>
-              Change password
+            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
+              Change Password
             </Link>
           </nav>
-          <Button href="#" color="primary" variant="outlined" className={classes.link}>
-            Logout
-          </Button>
+          < Button.LogoutButton {...props}  />
         </Toolbar>
       </AppBar>
       {/* Hero unit */}
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-          Hello Every One
+          Hello
+        </Typography>
+        <Typography variant="h5" align="center" color="textSecondary" component="p">
+          Nguyen Duy Chien
         </Typography>
       </Container>
       {/* End hero unit */}
-      <Container maxWidth="md" component="main">
-        
-      </Container>
       {/* Footer */}
       <Container maxWidth="md" component="footer" className={classes.footer}>
         <Grid container spacing={4} justify="space-evenly">
@@ -73,3 +68,4 @@ export default function Admin() {
     </React.Fragment>
   );
 }
+

@@ -6,7 +6,7 @@ import { ForgotPassword } from 'components/Page/ForgotPassword';
 import { ResetPassword } from 'components/Page/ResetPassword'; 
 import { Admin } from 'components/Page/Admin'
 import { ProtectedRoute } from 'router/protected.route'; 
-import { Home } from 'components/Page/Home'; 
+import  { Home }  from 'components/Page/Home'; 
 
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'; 
 
@@ -18,8 +18,8 @@ const App = () => {
                 <Route path="/Register" component={Register} />
                 <Route path="/ForgotPassword" component={ForgotPassword} />
                 <Route path="/ResetPassword" component={ResetPassword} />
-                <Route path="/Home" component={Home} />
-                <Route path="/Admin" component={Admin} />
+                <Route path="/Home" component = {Home} />
+                <Route path="/Admin" component ={Admin} />
                 {/* <ProtectedRoute path="/Home"/> */}
                 <Redirect from="/" to="/Home" />
             </Switch>

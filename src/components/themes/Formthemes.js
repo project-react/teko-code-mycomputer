@@ -1,9 +1,10 @@
 import React from 'react';
+import { setGlobal, useGlobal } from 'reactn'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
 import Inputthemes from '../themes/Inputthemes';
 
+import { Button }  from 'components/Button'
 import { updateValidation, displayValidationErrors, isFormValid } from '../../helpers/Validations/Validator';
 
 const SetstateForm = (type, page) => {
@@ -11,7 +12,13 @@ const SetstateForm = (type, page) => {
 }
 
 const InputChange = (type, page) => {
+     
     let textInput = document.getElementById(type).value;
+    
+    setGlobal({
+        type: type,
+        value: textInput
+    })
     updateValidation(type, textInput, page.state.validators);
     page.setState(SetstateForm(type, page));
     page.setState({ edit: true });
@@ -75,16 +82,22 @@ const AddInputsToForm = (props) => {
 
 const Formthemes = (props) => {
 
+    setGlobal({
+        type: '',
+        value: ''
+    })
+
     let stateForm = props.page.state;
 
     let errors = Errors(props.page);
 
     let buttonHandle = ''; 
-
+    
     if ( isFormValid(stateForm.validators, stateForm.inputManagement) ){
-        buttonHandle = ( 
-            <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => props.page.handleClick(event)} />      
-        ); 
+        if(props.title === "Login")
+            buttonHandle = ( <Button.LoginButton Page = { props.page } /> ); 
+        else
+            buttonHandle = ( <Button.SubmitButton /> )
     }
 
     return (
@@ -97,15 +110,12 @@ const Formthemes = (props) => {
                         page = { props.page }
                         errors = { errors } 
                     />
-                    { buttonHandle } 
+                    { buttonHandle }
                 </div>
             </MuiThemeProvider>
         </div>
     );
 }
 
-const style = {
-    margin: 15,
-};
 
 export default Formthemes; 

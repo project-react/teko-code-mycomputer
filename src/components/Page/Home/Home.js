@@ -8,11 +8,12 @@ import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 
+
 import { material } from 'components/material-ui'
 
-export default function Home() {
+export default function Admin() {
   const classes = material.useStyles();
-  document.title = "Home"; 
+  
   return (
     <React.Fragment>
       <CssBaseline />
@@ -34,13 +35,13 @@ export default function Home() {
       {/* Hero unit */}
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-          Hello Every One
+          Hello
+        </Typography>
+        <Typography variant="h5" align="center" color="textSecondary" component="p">
+          Every One
         </Typography>
       </Container>
       {/* End hero unit */}
-      <Container maxWidth="md" component="main">
-        
-      </Container>
       {/* Footer */}
       <Container maxWidth="md" component="footer" className={classes.footer}>
         <Grid container spacing={4} justify="space-evenly">
